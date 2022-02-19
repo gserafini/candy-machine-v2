@@ -148,12 +148,12 @@
     >
   {:else if !isActive && whitelist?.presale && !userWhitelisted}
     <!-- Mint not active, presale enabled but user not whitelisted -->
-    <button class=" btn-black" disabled={true}
+    <button class=" px-3 py-2 rounded-md bg-sky-600/30 border-2 border-indigo-500/50 text-white" disabled={true}
       >Whitelist Presale Access Only</button
     >
   {:else if !isActive && !whitelist?.presale}
     <!-- Mint is not active and not a presale -->
-    <button class=" btn-black" disabled={true}
+    <button class=" px-3 py-2 rounded-md bg-sky-600/30 border-2 border-indigo-500/50 text-white" disabled={true}
       >Mint Live @ {date.toUTCString()}</button
     >
   {:else if $userState.userBalance < nftPrice()}
