@@ -104,6 +104,8 @@
         ? `https://explorer.solana.com/address/${mintPublicKey}?cluster=devnet`
         : `https://explorer.solana.com/address/${mintPublicKey}`;
     throwConfetti();
+    // Check if user is still whitelisted (ie. check if they have another WL token)
+    userWhitelisted = userWhitelisted;
   }
 
   function throwConfetti(): void {
@@ -149,7 +151,7 @@
   {:else if !isActive && whitelist?.presale && !userWhitelisted}
     <!-- Mint not active, presale enabled but user not whitelisted -->
     <button class=" px-3 py-2 rounded-md bg-sky-600/30 border-2 border-indigo-500/50 text-white" disabled={true}
-      >Whitelist Presale Access Only</button
+      >Presale Period - You must have a Whitelist Token to mint</button
     >
   {:else if !isActive && !whitelist?.presale}
     <!-- Mint is not active and not a presale -->
@@ -170,11 +172,11 @@
       on:click={mint}
     >
       {#if isMinting}
-        <span>Minting ...</span>
+        <span>Minting...</span>
       {:else if mintSuccessful}
         <span>Mint succesful! Mint another?</span>
       {:else}
-        <span>Mint ({(nftPrice() / LAMPORTS_PER_SOL).toFixed(2)} SOL)</span>
+        <span>Mint Now <!--({(nftPrice() / LAMPORTS_PER_SOL).toFixed(2)} SOL)--></span>
       {/if}
     </button>
   {/if}

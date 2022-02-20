@@ -13,6 +13,7 @@
     getUserBalance,
     existsOwnerSPLToken,
   } from "./lib/state-helpers";
+import { time_ranges_to_array } from "svelte/internal";
 
   /***********************************/
   // Customise the app by changing the following variables.
@@ -84,6 +85,7 @@
       candyMachinePublicKey,
       provider
     );
+
     // Establish connection to wallet
     if (solana?.isPhantom) {
       $userState.walletPublicKey = await checkWalletConnected(solana);
@@ -145,38 +147,67 @@
         >
         Sol Visitors Are Landing!🛸<br />
         OFFICIAL MINT SITE<br />
-        <small class="text-indigo-200/70">mint.solvisitors.com</small>
+        <!-- <small class="text-indigo-200/70">mint.solvisitors.com</small> -->
       </h1>
         <img src={IMAGE_LINK} alt="{TITLE}" class=" w-1/2 mx-auto mb-5 rounded-lg shadow-xl border-2 border-white/30" />
-        <div class="text-sm sm:text-md pb-5 text-white ">
+        <div class="text-md sm:text-md pb-5 text-white ">
           <!-- {DESCRTIPTION} -->
-          Welcome to the official minting site for Sol Visitors NFT, a DAMO &amp; GEMS art project on the Solana blockchain!<br /><br /> 
-          
-          This collectible NFT entitles you to receive a minimum of 1 Visitor airdroppped from our main collection when it launches and also grants whitelist access to the pre-sale.<br /><br />
+          <h3 class="m-4"><strong>Public (Not Whitelist) Sale Begins</strong><br />
+            <small>{new Date($candyMachineState?.state.goLiveDate?.toNumber() * 1000)}</small></h3>
 
-          <strong>Total Supply:</strong> 256 Unique "Imprint" NFTs<br />
-          <strong>Price:</strong> 0.42 SOL
+            <h2 class="m-4 text-lg">First Wave: The Imprints</h2>
+
+          You are about to mint a <abbr title="Non-Fungible Token">NFT</abbr> on the Solana blockchain. We hope you enjoy the artwork and will do your best to be a good steward of the Visitor community. <em>Welcome Aboard!</em><br /><br />
+
+          {#if $candyMachineState.state.whitelistMintSettings && 
+            new Date($candyMachineState?.state.goLiveDate?.toNumber() * 1000) > new Date}
+            {#if $userState.isWhiteListed}
+            <div class="p-2 shadow-lg bg-indigo-900	rounded-lg">
+              <span class="my-auto text-gray-200 text-sm">
+                <strong>Congratulations, you have the whitelist token!</strong><br />
+                <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="18" height="18" style="width: 18px; height: 18px; margin: -2px 4px 0 0; display: inline;" class="" /> <span class="text-xs font-mono tracking-wider">{$candyMachineState.state.whitelistMintSettings?.mint}</span><br />
+                <em>One whitelist token is required per mint.</em></span>
+              </div>
+            {/if}
+            {#if !$userState.isWhiteListed}
+            <div class="p-2 shadow-lg bg-orange-900/40	rounded-lg">
+              <span class="my-auto text-gray-200 text-sm">
+                <strong>You need a whitelist token to mint at this time.</strong><br />
+                <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="18" height="18" style="width: 18px; height: 18px; margin: -2px 4px 0 0; display: inline;" class="" /> <span class="text-xs font-mono tracking-wider">{$candyMachineState.state.whitelistMintSettings?.mint}</span><br />
+                <em>You can try asking for one in the <a href="https://discord.gg/TF7zW5q9Ur" target="_blank" class="underline underline-offset-2">Discord</a>.</em></span>
+              </div>
+            {/if}
+          {/if}
+          <div class="">
+          <br /><strong>Price:</strong> 0.42 SOL + network fees
         </div>
+        </div>
+
         <Button {connection} />
 
-        <div class=" tracking-widest font-bold text-sm pt-3 text-white">
-          {itemsRedeemed}/{itemsAvailable} claimed
+        <div class="pt-3 text-md sm:text-md pb-5 text-white ">
+        <strong>Quantity:</strong> {itemsAvailable - itemsRedeemed} of {itemsAvailable} remaining.
         </div>
-        <div class="flex flex-col pt-3">
+
+
+
           {#if $userState.solanaExplorerLink}
+          <div class="flex flex-col pt-3">
             <a
               href={$userState.solanaExplorerLink}
               target="_blank"
               class="text-purple-700 font-semibold  p-1"
               >View on Solana Explorer</a
             >
+          </div>
           {/if}
-        </div>
+        
+
+        <a href="https://twitter.com/civickey/status/1478456202069565443" target="_blank" rel="noopener"><img class="m-2 w-40 mx-auto" src="images/Civic-Verified-Logo-768x208.png" alt="Verified by Civic"></a>  
+
       </div>
     </div>
-      <a href="https://twitter.com/civickey/status/1478456202069565443" target="_blank" rel="noopener"><img class="w-40 mx-auto" src="images/Civic-Verified-Logo-768x208.png" alt="Verified by Civic"></a>
-      <br /><br />
-      <a href="https://github.com/alvinsga/candy-machine-v2" target="_blank" rel="noopener" class="text-white/50 m-8 text-sm">❤️ Thank you to alvinsga for candy-machine-v2</a>
+      <a href="https://github.com/alvinsga/candy-machine-v2" target="_blank" rel="noopener" class="text-white/50 m-8 text-sm">❤️ Thank you to alvinsga for Candy Machine V2 Frontend</a>
       <br /><br />
   {/if}
 </main>

@@ -8,12 +8,13 @@
   <div class="text-white">
     <!--{currentDate.toString()}-->
   </div>
-  {#if $userState.isWhiteListed}
+  <!-- {#if $userState.isWhiteListed}
     <div class="flex mr-auto">
-      <img src="/star.svg" alt="" class="w-5 mr-2" />
-      <div class="my-auto text-gray-600 text-sm">Whitelist</div>
+      <span class="my-auto text-gray-200 text-sm">
+        <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="24" height="24" style="width: 24px; height: 24px; display: inline-block; margin: -2px 4px 0 0;" class="" />
+        You have a Whitelist Token!</span>
     </div>
-  {/if}
+  {/if} -->
   <div class="flex">
     {#if !$userState.walletPublicKey}
       <span class="my-auto mr-2 rounded-full h-2 w-2 bg-gray-500" />
