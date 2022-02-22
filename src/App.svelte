@@ -149,35 +149,34 @@ import { time_ranges_to_array } from "svelte/internal";
         OFFICIAL MINT SITE<br />
         <!-- <small class="text-indigo-200/70">mint.solvisitors.com</small> -->
       </h1>
-        <img src={IMAGE_LINK} alt="{TITLE}" class=" w-1/2 mx-auto mb-5 rounded-lg shadow-xl border-2 border-white/30" />
-        <div class="text-md sm:text-md pb-5 text-white ">
-          <!-- {DESCRTIPTION} -->
-          <h3 class="m-4"><strong>Public (Not Whitelist) Sale Begins</strong><br />
-            <small>{new Date($candyMachineState?.state.goLiveDate?.toNumber() * 1000)}</small></h3>
+        <img src={IMAGE_LINK} alt="{TITLE}" class=" w-1/4 mx-auto mb-5 rounded-lg shadow-xl border-2 border-white/30" />
 
-            <h2 class="m-4 text-lg">First Wave: The Imprints</h2>
-
-          You are about to mint a <abbr title="Non-Fungible Token">NFT</abbr> on the Solana blockchain. We hope you enjoy the artwork and will do your best to be a good steward of the Visitor community. <em>Welcome Aboard!</em><br /><br />
-
-          {#if $candyMachineState.state.whitelistMintSettings && 
-            new Date($candyMachineState?.state.goLiveDate?.toNumber() * 1000) > new Date}
-            {#if $userState.isWhiteListed}
-            <div class="p-2 shadow-lg bg-indigo-900	rounded-lg">
-              <span class="my-auto text-gray-200 text-sm">
-                <strong>Congratulations, you have the whitelist token!</strong><br />
-                <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="18" height="18" style="width: 18px; height: 18px; margin: -2px 4px 0 0; display: inline;" class="" /> <span class="text-xs font-mono tracking-wider">{$candyMachineState.state.whitelistMintSettings?.mint}</span><br />
-                <em>One whitelist token is required per mint.</em></span>
-              </div>
-            {/if}
-            {#if !$userState.isWhiteListed}
-            <div class="p-2 shadow-lg bg-orange-900/40	rounded-lg">
-              <span class="my-auto text-gray-200 text-sm">
-                <strong>You need a whitelist token to mint at this time.</strong><br />
-                <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="18" height="18" style="width: 18px; height: 18px; margin: -2px 4px 0 0; display: inline;" class="" /> <span class="text-xs font-mono tracking-wider">{$candyMachineState.state.whitelistMintSettings?.mint}</span><br />
-                <em>You can try asking for one in the <a href="https://discord.gg/TF7zW5q9Ur" target="_blank" class="underline underline-offset-2">Discord</a>.</em></span>
-              </div>
-            {/if}
+        {#if $candyMachineState.state.whitelistMintSettings && 
+          new Date($candyMachineState?.state.goLiveDate?.toNumber() * 1000) > new Date}
+          {#if $userState.isWhiteListed}
+          <div class="p-2 shadow-lg bg-indigo-900	rounded-lg">
+            <span class="my-auto text-gray-200 text-sm">
+              <strong>Congratulations, you have a Sol Visitors BEACON whitelist token!</strong><br />
+              <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="18" height="18" style="width: 18px; height: 18px; margin: -2px 4px 0 0; display: inline;" class="" /> <span class="text-xs font-mono tracking-wider">{$candyMachineState.state.whitelistMintSettings?.mint}</span><br />
+              <em>One whitelist token is required per mint.</em></span>
+            </div>
           {/if}
+          {#if !$userState.isWhiteListed}
+          <div class="p-2 shadow-lg bg-orange-900/40	rounded-lg">
+            <span class="my-auto text-gray-200 text-sm">
+              <strong>You need a Sol Visitors BEACON whitelist token to mint during Whitellist Pre-Sale period.</strong><br />
+              <img src="images/Sol_Visitors_BEACON_coin.png" alt="Whitelist Token" width="18" height="18" style="width: 18px; height: 18px; margin: -2px 4px 0 0; display: inline;" class="" /> <span class="text-xs font-mono tracking-wider">{$candyMachineState.state.whitelistMintSettings?.mint}</span><br />
+              <em>You can try asking for one in the <a href="https://discord.gg/TF7zW5q9Ur" target="_blank" class="underline underline-offset-2">Discord</a>.</em></span>
+            </div>
+          {/if}
+        {/if}
+
+        <div class="text-md sm:text-md pb-5 text-white ">
+
+            <h2 class="m-4 text-lg"><strong>Sol Visitors First Wave: Imprints</strong></h2>
+
+          You are about to mint a <abbr title="Non-Fungible Token">NFT</abbr> on the Solana blockchain. We hope you enjoy the artwork and will do your best to be a good steward of the Visitor community. <em>Welcome Aboard!</em>
+
           <div class="">
           <br /><strong>Price:</strong> 0.42 SOL + network fees
         </div>
@@ -188,8 +187,6 @@ import { time_ranges_to_array } from "svelte/internal";
         <div class="pt-3 text-md sm:text-md pb-5 text-white ">
         <strong>Quantity:</strong> {itemsAvailable - itemsRedeemed} of {itemsAvailable} remaining.
         </div>
-
-
 
           {#if $userState.solanaExplorerLink}
           <div class="flex flex-col pt-3">
@@ -203,7 +200,10 @@ import { time_ranges_to_array } from "svelte/internal";
           {/if}
         
 
-        <a href="https://twitter.com/civickey/status/1478456202069565443" target="_blank" rel="noopener"><img class="m-2 w-40 mx-auto" src="images/Civic-Verified-Logo-768x208.png" alt="Verified by Civic"></a>  
+        <a href="https://twitter.com/civickey/status/1478456202069565443" target="_blank" rel="noopener"><img class="m-2 w-40 mx-auto" src="images/Civic-Verified-Logo-768x208.png" alt="Verified by Civic"></a>
+
+        <h3 class="m-4 text-pink-200"><strong>Public Sale Begins after Whitelist Pre-Sale</strong><br />
+          <small>{new Date($candyMachineState?.state.goLiveDate?.toNumber() * 1000)}</small></h3>
 
       </div>
     </div>
